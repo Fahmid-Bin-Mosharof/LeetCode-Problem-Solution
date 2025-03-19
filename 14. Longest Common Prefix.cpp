@@ -1,3 +1,6 @@
+// Date: 19/03/2025
+// 14. Longest Common Prefix
+// C++ Solution
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
