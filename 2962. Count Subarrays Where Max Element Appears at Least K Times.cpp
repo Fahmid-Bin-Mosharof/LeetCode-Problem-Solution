@@ -1,35 +1,35 @@
 // Date: 29/04/2025
 // 2962. Count Subarrays Where Max Element Appears at Least K Times
 // C++ Solution
-// Brute Force
+// Sliding Window
 
 class Solution {
 public:
     long long countSubarrays(vector<int>& nums, int k) {
         int n = nums.size();
-        int ans = 0;
+        int maximum = *max_element(nums.begin(), nums.end());
+        long long ans = 0;
 
+        int count = 0;
+        int x = 0;
+        
         for(int i=0; i<n; i++){
-            int maximum = nums[i];
-            int count = 0;
+            if(nums[i] == maximum){
+                count++;
+            }
 
-            for(int j=i; j<n; j++){
-                if(nums[j] > maximum){
-                    maximum = nums[j];
-                    count = 1;
-                } 
-                else if(nums[j] == maximum){
-                    count++;
+            while(count >= k){
+                ans += (n - i);
+                
+                if(nums[x] == maximum){
+                    count--;
                 }
-
-                if(count >= k){
-                    ans++;
-                }
+                x++;
             }
         }
         return ans;
     }
 };
 
-// Time Complexity: O(n^2)
+// Time Complexity: O(n)
 // Space Complexity: O(1)
